@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-export class FormValidator {
+class FormValidator {
     static validate(form) {
         return new Promise((resolve, reject) => {
             // Simulating form validation
@@ -20,7 +21,7 @@ export class FormValidator {
         });
     }
 }
-export class Loader {
+class Loader {
     static showLoader() {
         return __awaiter(this, void 0, void 0, function* () {
             console.log("Loading...");
@@ -30,7 +31,7 @@ export class Loader {
         });
     }
 }
-export var Logger;
+var Logger;
 (function (Logger) {
     function log(message) {
         console.log(message);
@@ -69,9 +70,16 @@ Logger.log("Starting form submission...");
 // Using async/await and Promises
 function submitForm() {
     return __awaiter(this, void 0, void 0, function* () {
+        const nameInput = document.getElementById("name");
+        const emailInput = document.getElementById("email");
+        const ageInput = document.getElementById("age");
         try {
             yield Loader.showLoader();
-            const formData = { name: "John", email: "john@example.com", age: 25 };
+            const formData = {
+                name: nameInput.value,
+                email: emailInput.value,
+                age: parseInt(ageInput.value, 10),
+            };
             yield FormValidator.validate(formData);
             Logger.log("Form submitted successfully.");
         }
@@ -80,4 +88,4 @@ function submitForm() {
         }
     });
 }
-submitForm();
+// submitForm();
